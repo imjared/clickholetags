@@ -1,0 +1,24 @@
+{
+  "name": "clickholetags",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^1.0.0",
+    "cheerio": "^0.19.0",
+    "lodash": "^3.9.1",
+    "mongoose": "^4.0.3",
+    "request": "^2.55.0",
+    "twitter": "^1.2.5",
+    "with-env": "^0.1.0",
+    "xml2js": "^0.4.8"
+  },
+  "devDependencies": {
+    "node-mongoose-fixtures": "^0.2.4"
+  }
+}
