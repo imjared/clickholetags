@@ -103,17 +103,23 @@ var constructTweet = function( url, tags, callback ) {
     formattedTweet = tweet.substring(0, tweet.lastIndexOf(', ')) + ' ';
     formattedTweet += url;
 
-    client.post('statuses/update', {
-        status: formattedTweet
-    }, function(error, tweet, response) {
-        if ( error ) {
-            console.log( error );
-            tags.pop();
-            constructTweet( url, tags, callback );
-        } else {
-            console.log( 'twatted' );
-            callback();
-        }
-    });
+    if ( tags.length === 0 ) {
+        callback();
+    } else {
+
+        client.post('statuses/update', {
+            status: formattedTweet
+        }, function(error, tweet, response) {
+            if ( error ) {
+                console.log( error );
+                tags.pop();
+                constructTweet( url, tags, callback );
+            } else {
+                console.log( 'twatted' );
+                callback();
+            }
+        });
+        
+    }
 
 };
