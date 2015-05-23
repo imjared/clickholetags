@@ -1,11 +1,11 @@
 require('with-env')();
 
-var request = require('request');
+var request     = require('request');
 var parseString = require('xml2js').parseString;
-var cheerio = require('cheerio');
-var _ = require('lodash');
-var Twitter = require('twitter');
-var async = require('async');
+var cheerio     = require('cheerio');
+var _           = require('lodash');
+var Twitter     = require('twitter');
+var async       = require('async');
 
 var mongoose      = require('mongoose');
 var Schema        = mongoose.Schema;
@@ -38,8 +38,6 @@ request( url, function(error, response, body) {
                 var title = article.title[0];
                 var articleURL = article.link[0];
 
-                // console.log( 'running for: ' + title );
-
                 Articles.find({
                     title: title
                 }, function( err, article ) {
@@ -48,19 +46,15 @@ request( url, function(error, response, body) {
                     } else {
                         if ( article.length === 0 ) {
                             
-                            // console.log( 'nothing found, creating' );
-
                             Articles.create({
                                 title: title,
                                 url: articleURL
                             }).then( function( createdArticle ) {
-                                // console.log( 'created article, off we go!' );
                                 articleRequester( articleURL, callback );
                             });
 
                         } else {
                             
-                            // run callback
                             console.log( 'Already exists' );
                             callback();
 
@@ -111,7 +105,9 @@ var constructTweet = function( url, tags, callback ) {
             status: formattedTweet
         }, function(error, tweet, response) {
             if ( error ) {
-                console.log( error );
+                // error is probably going to be regarding tweet length
+                // remove a tag and try again
+                // if it's something else, the app will break. ¯\_(ツ)_/¯
                 tags.pop();
                 constructTweet( url, tags, callback );
             } else {
