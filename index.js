@@ -92,7 +92,7 @@ var articleRequester = function( url, callback ) {
 var constructTweet = function( url, tags, callback ) {
     var tweet = '';
     _.forEach( tags, function( tag ) {
-        tweet += '"' + tag + '", ';
+        tweet += '"' + tag.trim() + '", ';
     });
     formattedTweet = tweet.substring(0, tweet.lastIndexOf(', ')) + ' ';
     formattedTweet += url;
